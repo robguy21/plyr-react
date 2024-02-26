@@ -1,13 +1,15 @@
 import { jsx } from 'react/jsx-runtime';
 import * as React from 'react';
-import PlyrJS from 'plyr';
+import PlyrJS from '@robguy21/plyr';
 import PropTypes from 'prop-types';
 import useAptor from 'react-aptor';
 
-const instantiate = (_, params) => {
-  const plyr = new PlyrJS(".plyr-react", params.options || {});
-  if (params.source)
-    plyr.source = params.source;
+const instantiate = (targetElement, params) => {
+  var _a;
+  const target = targetElement != null ? targetElement : ".plyr-react";
+  const plyr = new PlyrJS(target, (_a = params == null ? void 0 : params.options) != null ? _a : {});
+  if (params == null ? void 0 : params.source)
+    plyr.source = params == null ? void 0 : params.source;
   return plyr;
 };
 const destroy = (plyr) => {
@@ -43,7 +45,7 @@ function usePlyr(ref, params, deps = null) {
       destroy,
       params
     },
-    deps || [params.options, params.source]
+    deps != null ? deps : [params.options, params.source]
   );
 }
 const Plyr = React.forwardRef((props, ref) => {

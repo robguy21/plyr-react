@@ -1,5 +1,5 @@
-import Plyr from "plyr-react";
-import "plyr-react/dist/plyr.css";
+import Plyr from "@robguy21/plyr-react";
+import "@robguy21/plyr-react/plyr.css";
 import contents from "./contents.json";
 
 /**

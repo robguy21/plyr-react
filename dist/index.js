@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var React = require('react');
-var PlyrJS = require('plyr');
+var PlyrJS = require('@robguy21/plyr');
 var PropTypes = require('prop-types');
 var useAptor = require('react-aptor');
 var jsxRuntime = require('react/jsx-runtime');
@@ -61,9 +61,11 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 
 var _excluded = ["source", "options"];
-var instantiate = function instantiate(_, params) {
-  var plyr = new PlyrJS__default["default"](".plyr-react", params.options || {});
-  if (params.source) plyr.source = params.source;
+var instantiate = function instantiate(targetElement, params) {
+  var _params$options;
+  var target = targetElement != null ? targetElement : ".plyr-react";
+  var plyr = new PlyrJS__default["default"](target, (_params$options = params == null ? void 0 : params.options) != null ? _params$options : {});
+  if (params != null && params.source) plyr.source = params == null ? void 0 : params.source;
   return plyr;
 };
 var destroy = function destroy(plyr) {
@@ -94,6 +96,7 @@ var getAPI = function getAPI(plyr) {
   };
 };
 function usePlyr(ref, params, deps) {
+  var _deps;
   if (deps === void 0) {
     deps = null;
   }
@@ -102,7 +105,7 @@ function usePlyr(ref, params, deps) {
     getAPI: getAPI,
     destroy: destroy,
     params: params
-  }, deps || [params.options, params.source]);
+  }, (_deps = deps) != null ? _deps : [params.options, params.source]);
 }
 var Plyr = React__namespace.forwardRef(function (props, ref) {
   var source = props.source,

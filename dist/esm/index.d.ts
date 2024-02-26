@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { DependencyList, DetailedHTMLProps, Ref, VideoHTMLAttributes } from "react";
-import PlyrJS, { Options, SourceInfo } from "plyr";
+import PlyrJS, { Options, SourceInfo } from "@robguy21/plyr";
 export type PlyrInstance = PlyrJS;
 export type PlyrOptions = Options;
 export type PlyrSource = SourceInfo;

@@ -1,4 +1,4 @@
-System.register(['react/jsx-runtime', 'react', 'plyr', 'prop-types', 'react-aptor'], (function (exports) {
+System.register(['react/jsx-runtime', 'react', '@robguy21/plyr', 'prop-types', 'react-aptor'], (function (exports) {
   'use strict';
   var jsx, React, PlyrJS, PropTypes, useAptor;
   return {
@@ -17,10 +17,12 @@ System.register(['react/jsx-runtime', 'react', 'plyr', 'prop-types', 'react-apto
 
       exports('usePlyr', usePlyr);
 
-      const instantiate = (_, params) => {
-        const plyr = new PlyrJS(".plyr-react", params.options || {});
-        if (params.source)
-          plyr.source = params.source;
+      const instantiate = (targetElement, params) => {
+        var _a;
+        const target = targetElement != null ? targetElement : ".plyr-react";
+        const plyr = new PlyrJS(target, (_a = params == null ? void 0 : params.options) != null ? _a : {});
+        if (params == null ? void 0 : params.source)
+          plyr.source = params == null ? void 0 : params.source;
         return plyr;
       };
       const destroy = (plyr) => {
@@ -56,7 +58,7 @@ System.register(['react/jsx-runtime', 'react', 'plyr', 'prop-types', 'react-apto
             destroy,
             params
           },
-          deps || [params.options, params.source]
+          deps != null ? deps : [params.options, params.source]
         );
       }
       const Plyr = exports('default', React.forwardRef((props, ref) => {

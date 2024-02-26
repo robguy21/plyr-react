@@ -1,6 +1,6 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('plyr'), require('prop-types'), require('react-aptor'), require('react/jsx-runtime')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', 'plyr', 'prop-types', 'react-aptor', 'react/jsx-runtime'], factory) :
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@robguy21/plyr'), require('prop-types'), require('react-aptor'), require('react/jsx-runtime')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', '@robguy21/plyr', 'prop-types', 'react-aptor', 'react/jsx-runtime'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global["plyr-react"] = {}, global.React, global.PlyrJS, global.PropTypes, global.useAptor, global.jsxRuntime));
 })(this, (function (exports, React, PlyrJS, PropTypes, useAptor, jsxRuntime) { 'use strict';
 
@@ -57,9 +57,11 @@
   }
 
   var _excluded = ["source", "options"];
-  var instantiate = function instantiate(_, params) {
-    var plyr = new PlyrJS__default["default"](".plyr-react", params.options || {});
-    if (params.source) plyr.source = params.source;
+  var instantiate = function instantiate(targetElement, params) {
+    var _params$options;
+    var target = targetElement != null ? targetElement : ".plyr-react";
+    var plyr = new PlyrJS__default["default"](target, (_params$options = params == null ? void 0 : params.options) != null ? _params$options : {});
+    if (params != null && params.source) plyr.source = params == null ? void 0 : params.source;
     return plyr;
   };
   var destroy = function destroy(plyr) {
@@ -90,6 +92,7 @@
     };
   };
   function usePlyr(ref, params, deps) {
+    var _deps;
     if (deps === void 0) {
       deps = null;
     }
@@ -98,7 +101,7 @@
       getAPI: getAPI,
       destroy: destroy,
       params: params
-    }, deps || [params.options, params.source]);
+    }, (_deps = deps) != null ? _deps : [params.options, params.source]);
   }
   var Plyr = React__namespace.forwardRef(function (props, ref) {
     var source = props.source,

@@ -6,7 +6,7 @@ import type {
   Ref,
   VideoHTMLAttributes,
 } from "react";
-import PlyrJS, { Options, SourceInfo } from "plyr";
+import PlyrJS, { Options, SourceInfo } from "@robguy21/plyr";
 import PropTypes from "prop-types";
 import useAptor, { Destroy, GetAPI, Instantiate } from "react-aptor";
 
@@ -40,9 +40,10 @@ const instantiate: Instantiate<
   PlyrJS,
   HTMLVideoElement,
   PlyrConfigurationProps
-> = (_, params) => {
+> = (targetElement, params) => {
   // The node update of ref in react life cycle seems to have issue, used class selector instead
-  const plyr = new PlyrJS(".plyr-react", params?.options ?? {});
+  const target = targetElement ?? ".plyr-react";
+  const plyr = new PlyrJS(target, params?.options ?? {});
   if (params?.source) plyr.source = params?.source;
   return plyr;
 };

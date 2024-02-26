@@ -7,8 +7,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@robguy21/plyr-react": "5.3.0-4a",
     "hls.js": "^1.1.5",
-    "plyr-react": "next",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
