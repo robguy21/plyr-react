@@ -114,21 +114,36 @@ export function usePlyr(
 }
 
 /* Creating a React component that is initialized with Plyr. */
-const Plyr = React.forwardRef<APITypes, PlyrProps>((props, ref) => {
+const PlyrApi = React.forwardRef<APITypes, PlyrProps>((props, ref) => {
   const { source, options = null, ...rest } = props;
   const raptorRef = usePlyr(ref, {
     source,
     options,
   }) as MutableRefObject<HTMLVideoElement>;
-  return <video ref={raptorRef} className="plyr-react plyr" {...rest} />;
+
+  return (
+    <video
+      ref={raptorRef}
+      data-hello="darkness-my-old-friend"
+      className="plyr-react plyr"
+      {...rest}
+    />
+  );
+});
+
+const Plyr = React.memo(PlyrApi, (prevProps, nextProps) => {
+  return (
+    prevProps.source === nextProps.source &&
+    prevProps.options?.controls === nextProps.options?.controls
+  );
 });
 
 /* Setting the default props and prop types for the component. */
 if (__DEV__) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  Plyr.displayName = "Plyr";
+  PlyrApi.displayName = "Plyr";
 
-  Plyr.defaultProps = {
+  PlyrApi.defaultProps = {
     options: {
       controls: [
         "rewind",
@@ -189,7 +204,7 @@ if (__DEV__) {
     },
   };
 
-  Plyr.propTypes = {
+  PlyrApi.propTypes = {
     options: PropTypes.object,
     source: PropTypes.any,
   };
